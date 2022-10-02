@@ -10,13 +10,21 @@ function copyToClipboard(text, id) {
       .writeText(text)
       .then(() => {
         var element = document.getElementById(id);
-        element.innerText = "copied";
+        element.innerText = "copied!";
         element.style.color = "#34cc34";
+        setTimeout(() => {
+          element.innerText = "copy";
+          element.style.color = "inherit";
+        }, 3000);
       })
       .catch(() => {
         var element = document.getElementById(id);
         element.innerText = "failed to copy";
         element.style.color = "#34cc34";
+        setTimeout(() => {
+          element.innerText = "copy";
+          element.style.color = "inherit";
+        }, 3000);
       });
   }
 }
