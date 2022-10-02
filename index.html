@@ -21,7 +21,7 @@
     <noscript
       ><link rel="stylesheet" href="assets/css/noscript.css"
     /></noscript>
-    <script type="module">
+    <script defer type="module">
       // Import the functions you need from the SDKs you need
       import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
       // TODO: Add SDKs for Firebase products that you want to use
@@ -141,6 +141,45 @@
         <!-- Contact -->
         <article id="contact">
           <h2 class="major">Contact</h2>
+          <div>
+            <a href="mailto:yjain56@yahoo.com" target="_blank"
+              ><span class="label">yjain56@yahoo.com</span></a
+            >
+            <span
+              id="mail-text"
+              onclick="copyToClipboard('yjain56@yahoo.com', 'mail-text')"
+              style="
+                cursor: pointer;
+                border-bottom: dotted 1px rgba(255, 255, 255, 0.5);
+                margin: 0 8px;
+              "
+              >copy</span
+            >
+          </div>
+          <div style="margin-top: 8px">
+            <a href="tel:+919049778749" target="_blank"
+              ><span class="label">+91 90497 778748</span></a
+            >
+            <span
+              id="phone-text"
+              onclick="copyToClipboard('+91-9049778749', 'phone-text')"
+              style="
+                cursor: pointer;
+                border-bottom: dotted 1px rgba(255, 255, 255, 0.5);
+                margin: 0 8px;
+              "
+              >copy</span
+            >
+          </div>
+          <div style="margin: 8px 0">
+            <a href="https://wa.me/919049778749?text=Hi" target="_blank"
+              ><i class="icon brands fa-whatsapp"></i
+              ><span class="label"> &nbsp;Whatsapp me</span>
+            </a>
+          </div>
+
+          <h3 class="minor" style="margin-top: 24px">Find me on</h3>
+
           <!-- <form method="post" action="#">
             <div class="fields">
               <div class="field half">
@@ -182,14 +221,6 @@
             </li>
             <li>
               <a
-                href="https://www.instagram.com/yash_en.jain.neer"
-                target="_blank"
-                class="icon brands fa-instagram"
-                ><span class="label">Instagram</span></a
-              >
-            </li>
-            <li>
-              <a
                 href="https://github.com/Jainysh"
                 target="_blank"
                 class="icon brands fa-github"
@@ -198,12 +229,21 @@
             </li>
             <li>
               <a
+                href="https://www.instagram.com/yash_en.jain.neer"
+                target="_blank"
+                class="icon brands fa-instagram"
+                ><span class="label">Instagram</span></a
+              >
+            </li>
+
+            <!-- <li>
+              <a
                 href="https://wa.me/919049778749?text=Hi"
                 target="_blank"
                 class="icon brands fa-whatsapp"
                 ><span class="label">Whatsapp</span></a
               >
-            </li>
+            </li> -->
           </ul>
         </article>
 
@@ -515,11 +555,11 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
         </article>
       </div>
       <!-- Footer -->
-      <footer id="footer">
+      <!-- <footer id="footer">
         <p class="copyright">
           &copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.
         </p>
-      </footer>
+      </footer> -->
     </div>
 
     <!-- BG -->
