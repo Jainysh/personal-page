@@ -1,50 +1,64 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
-    />
-    <title>Entering captcha</title>
-  </head>
-  <body>
-    <p style="text-align: center; font-size: 1.2em">
-      Please, enter captcha to continue
-    </p>
+<head>
+  <meta charset="UTF-8">
+  <title>Firebase Phone Authentication</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-    <script src="/__/firebase/5.3.1/firebase-app.js"></script>
-    <script src="/__/firebase/5.3.1/firebase-auth.js"></script>
-    <script src="/__/firebase/init.js"></script>
-    <script>
-      function getToken(callback) {
-        var container = document.createElement("div");
-        container.id = "captcha";
-        document.body.appendChild(container);
-        var captcha = new firebase.auth.RecaptchaVerifier("captcha", {
-          size: "normal",
-          callback: function (token) {
-            callback(token);
-          },
-          "expired-callback": function () {
-            callback("");
-          },
-        });
-        captcha.render().then(function () {
-          captcha.verify();
-        });
-      }
+  <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyAPTyD-DCVdF8TZay5pjxzQL5pEih6NTO0",
+      authDomain: "instant-hisab.firebaseapp.com",
+      projectId: "instant-hisab",
+      storageBucket: "instant-hisab.appspot.com",
+      messagingSenderId: "504722552430",
+      appId: "1:504722552430:web:6c838936f575b03e41187f",
+      measurementId: "G-HZZ2LYKH6P",
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
+  <script src="https://cdn.firebase.com/libs/firebaseui/2.3.0/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.3.0/firebaseui.css" />
+  <link href="style.css" rel="stylesheet" type="text/css" media="screen" />
 
-      function sendTokenToApp(token) {
-        var baseUri = decodeURIComponent(
-          location.search.replace(/^\?appurl\=/, "")
-        );
-        location.href = baseUri + "/?token=" + encodeURIComponent(token);
-      }
+</head>
 
-      document.addEventListener("DOMContentLoaded", function () {
-        getToken(sendTokenToApp);
+<body>
+  <script>
+
+    function getToken(phoneNumber) {
+      var container = document.createElement('div');
+      container.id = 'captcha';
+      document.body.appendChild(container);
+      window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('captcha', {
+        'size': 'invisible',        
+        'callback': function (response) {
+          var appVerifier = window.recaptchaVerifier;
+          firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
+            .then(function (confirmationResult) {
+              window.ReactNativeWebView.postMessage(confirmationResult.verificationId);
+            }).catch(function (error) {
+              console.log("error", error)
+              window.ReactNativeWebView.postMessage('ErrorSmsCode');
+            });
+        }
       });
-    </script>
-  </body>
+
+      window.recaptchaVerifier.render().then(function () {
+        window.recaptchaVerifier.verify();
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      window.ReactNativeWebView.postMessage('DOMLoaded');
+    });
+
+
+  </script>
+  <h2>Verification Code is Sending !! </h2>
+  <h3>Please Wait !!</h3>
+
+</body>
+
 </html>
